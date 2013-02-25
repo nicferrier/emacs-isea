@@ -91,9 +91,15 @@ creation function and the main `isea' function.")
          (process-mark fake-proc) (point))
         (comint-output-filter fake-proc isea-prompt))))
 
+(defvar isea/daemon-name-history nil
+  "History of isea/daemon-names.")
+
 (defun isea (daemon-name)
   "Open a Lisp shell to the Emacs daemon socket."
-  (interactive "MInferior Deamon name:")
+  (interactive
+   (list
+    (read-from-minibuffer
+     "Inferior Deamon name: " nil nil nil 'isea/daemon-name-history)))
   (let ((isea/daemon-name daemon-name))
     (with-current-buffer
         (get-buffer-create (format "*isea-%s*" daemon-name))
