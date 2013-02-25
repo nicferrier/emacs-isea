@@ -47,19 +47,22 @@
 (defun isea/input-sender (proc input)
   "Send input to the associated daemon Emacs."
   (let ((buffer-read-only nil)
-        (lb (- (line-beginning-position) 5)))
-    ;; (comint-output-filter proc (format "#%s\n" id))
-    (condition-case err
-        (let ((output
-               (server-eval-at
-                (process-get proc :isea/daemon-name)
-                (let* ((my-lisp (car (read-from-string input))))
-                  `(let ((-isea-response ,my-lisp)) ,isea/lisp)))))
-          (comint-output-filter proc (format "%s\n" output)))
-      (error (comint-output-filter
-              proc
-              (format "something went wrong %S\n" err))))
-    (comint-output-filter proc isea-prompt)))
+        (lb (- (line-beginning-position) 5))
+        (lisp-to-send (car (read-from-string input))))
+    (if (or (equal lisp-to-send '(quit))
+            (equal lisp-to-send 'quit))
+        (comint-quit-subjob)
+        ;; Else send input normally
+        (condition-case err
+            (let ((output
+                   (server-eval-at
+                    (process-get proc :isea/daemon-name)
+                    `(let ((-isea-response ,lisp-to-send)) ,isea/lisp))))
+              (comint-output-filter proc (format "%s\n" output)))
+          (error (comint-output-filter
+                  proc
+                  (format "something went wrong %S\n" err))))
+        (comint-output-filter proc isea-prompt))))
 
 (defvar isea/daemon-name nil
   "Designed to be let bound to the name of the daemon.
