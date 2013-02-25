@@ -4,6 +4,9 @@
 
 ;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
 ;; Keywords: processes, lisp
+;; Created: 25th February 2013
+;; Url: https://github.com/nicferrier/emacs-isea
+;; Version: 0.0.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
