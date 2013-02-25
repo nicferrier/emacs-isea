@@ -1,0 +1,22 @@
+= ISEA - Interactive Server Eval At =
+
+Emacs can run as a daemon.
+
+Emacs can run multiple daemons each with a different socket.
+
+Emacs can talk from one daemon to another, quite easily, using the
+{{{server-eval-at}}} function.
+
+This is a shell to let you talk to a particular Emacs daemon in a
+simple way.
+
+== Obligatory Early Code Warning ==
+
+This code could hang your Emacs!
+
+I make no promise about whether we've caught everything that could
+hang the terminal or the client process.
+
+But I'd also like to point out how amusing it is that we worry about
+whether we'll have to restart our Emacsen. Uptime competitions are
+important!
