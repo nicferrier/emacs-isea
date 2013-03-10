@@ -6,7 +6,8 @@
 ;; Keywords: processes, lisp
 ;; Created: 25th February 2013
 ;; Url: https://github.com/nicferrier/emacs-isea
-;; Version: 0.0.1
+;; Package-Requires: ((elpakit "0.0.18"))
+;; Version: 0.0.2
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -32,6 +33,10 @@
 
 ;; Supply a daemon socket name (just the socket name, no need for the
 ;; path) and ISEA will open a comint and send the daemon stuff to eval.
+
+;; If you start a daemon with elpakit then you can use the elpakit
+;; daemon list to find a daemon to use. Elpakit has a key binding for
+;; isea if it finds it is installed.
 
 ;;; Code:
 
